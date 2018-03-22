@@ -1,0 +1,9 @@
+import pandas as pd
+
+pd.read_csv(csv_file)
+results = csv['Event Description']
+
+// TODO Cut results down to email addresses
+// feed emails back into GSuite query
+// API for GSuite Admin?
+// Python --> GSuite functionality
