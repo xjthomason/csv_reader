@@ -7,8 +7,19 @@
 #csvfile = location of Report output
 columnName = 'Event Description'
 
-import argparse
+import csv, datetime
 import pandas as pd
+
+today = datetime.date.today()
+
+def createCSV(list):
+	global today
+	
+	with open('Google_list_%s.csv' % today, 'wb') as csvfile:
+		writer = csv.DictWriter(csvfile, fieldnames = ['Email', 'First Name', 'Last Name', 'Full Name', 'Location'])
+		writer.writeheader()
+		for i in list:
+			print i.split(',')[0]
 
 def parseColumnExtractEmails(csvFile, columnName):
 	
@@ -17,18 +28,3 @@ def parseColumnExtractEmails(csvFile, columnName):
 	for r in results:
 		print r.split(' ')[0]
 	
-def main():
-#	global csvfile
-	global columnName
-	
-	parser = argparse.ArgumentParser('usage%prog ' '-f <csvfile> -c <columnName>')
-	parser.add_argument('-f', '--csvfile', help='Please enter the path to the csv file')
-	args = parser.parse_args()
-	csvfile = args.csvfile
-	
-	# csvfile = raw_input("Enter file path: ")
-	# columnName = raw_input("Enter column name: ")
-	
-	parseColumnExtractEmails(csvfile, columnName)
-
-main()
