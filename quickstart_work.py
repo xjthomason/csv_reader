@@ -61,8 +61,8 @@ def main():
 	service = discovery.build('admin', 'directory_v1', http=http)
 	#service = discovery.build('admin', 'reports_v1', http=http)
 
-	print('Getting the first 10 users in the domain')
-	results = service.users().list(customer='my_customer', maxResults=10, orderBy='email').execute()
+	print('Retrieving Google Admin User Account Information...')
+	results = service.users().list(customer='my_customer', maxResults=500, orderBy='email').execute()
 	users = results.get('users', [])
 
 	if not users:
@@ -70,7 +70,7 @@ def main():
 	else:
 		print('Users:')
 		for user in users:
-			print ('{0} ({1}) ({2})'.format(user['primaryEmail'],user['name']['fullName'],user['orgUnitPath']))
+			print (u'{0}, {1}, {2}, {3}, {4}'.format(user['primaryEmail'],user['name']['givenName'],user['name']['familyName'],user['name']['fullName'],user['orgUnitPath']))
 
     # print('Getting the last 10 login events')
     # results = service.activities().list(userKey='all', applicationName='login',
