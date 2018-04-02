@@ -1,10 +1,10 @@
 import api_query_users as api
 import csv_reader
-import datetime, pandas, csv
+import datetime
 
 #SET_TIME
 today = datetime.date.today()
-week_ago = unicode(today - datetime.timedelta(days=7))
+week_ago = unicode(today - datetime.timedelta(days=152))
 
 users = []
 
