@@ -34,10 +34,10 @@ def createCSV(list):
 			
 			print str(number) + ' ' + fullName	
 			writer.writerow({'Email': email, 
-							 'First Name': firstName, 
-							 'Last Name': lastName, 
-							 'Full Name': fullName, 
-							 'Location': str(location)})
+							 'First Name': firstName.encode('utf-8'), 
+							 'Last Name': lastName.encode('utf-8'), 
+							 'Full Name': fullName.encode('utf-8'), 
+							 'Location': location})
 			#print location.split('/')
 	
 	os.system('cp Google_list_%s.csv output/ -f' % today)
