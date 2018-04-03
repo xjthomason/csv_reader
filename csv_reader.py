@@ -15,24 +15,20 @@ today = datetime.date.today()
 def createCSV(list):
 	global today
 	
-	number = 0
 	with open('Google_list_%s.csv' % today, 'wb') as csvfile:
 		writer = csv.DictWriter(csvfile, fieldnames = ['Email', 'First Name', 'Last Name', 'Full Name', 'Location'])
 		writer.writeheader()
 		for i in list:
-			number += 1
 			email = i.split(',')[0]
 			firstName = i.split(',')[1]
 			lastName = i.split(',')[2]
 			fullName = i.split(',')[3]
 			OU = i.split(',')[4]
-			try:
-				location = OU.split('/')[1] + ' - ' + OU.split('/')[3]
-			except:
-				location = OU.split('/')[1]			
-				continue
+			if "Asia" in OU:
+				location = identifyLang(OU)
+			else:
+				location = OU.split('/')[1] #TODO split up locations by language
 			
-			print str(number) + ' ' + fullName	
 			writer.writerow({'Email': email, 
 							 'First Name': firstName.encode('utf-8'), 
 							 'Last Name': lastName.encode('utf-8'), 
@@ -42,6 +38,21 @@ def createCSV(list):
 	
 	os.system('cp Google_list_%s.csv output/ -f' % today)
 	os.system('rm Google_list_%s.csv' % today)
+	
+def identifyLang(OU):
+	
+	if "Chi" in OU:
+		return "Asia - Chinese"
+	elif "Jap" in OU:
+		return "Asia - Japanese"
+	elif "Mala" or "Pena" in OU:
+		return "Asia - Malay"
+	elif "Korea" in OU:
+		return "Asia - Korean"
+	elif "Indi" in OU:
+		return "Asia - Hindi"
+	else: 
+		return "Unsure"
 
 def parseColumnExtractEmails(csvFile, columnName):
 	
