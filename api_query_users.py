@@ -31,10 +31,9 @@ def getUsers(date):
 			else:
 				for user in users:
 					if user['creationTime'] >= date: # pull all users created in the last week
-						output.append((u'{0}, {1}, {2}, {3}, {4}'.format(user['primaryEmail'],
+						output.append((u'{0}, {1}, {2}, {3}'.format(user['primaryEmail'],
 																		 user['name']['givenName'],
 																		 user['name']['familyName'],
-																		 user['name']['fullName'],
 																		 user['orgUnitPath'])))
 					else:
 						continue
